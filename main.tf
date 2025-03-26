@@ -39,6 +39,16 @@ provider "helm" {
 }
 
 ################################################################################
+# Variables
+################################################################################
+
+variable "aws_region" {
+  description = "AWS region to deploy resources"
+  type        = string
+  default     = "ap-northeast-1"
+}
+
+################################################################################
 # Common data/locals
 ################################################################################
 
@@ -53,14 +63,14 @@ data "aws_availability_zones" "available" {
 locals {
   # name   = basename(path.cwd)
   name   = "ml-capacity-block"
-  region = "ap-northeast-1"
+  region = var.aws_region
 
   vpc_cidr = "10.0.0.0/16"
   azs      = slice(data.aws_availability_zones.available.names, 0, 3)
 
   tags = {
     Blueprint  = local.name
-    GithubRepo = "github.com/aws-ia/terraform-aws-eks-blueprints"
+    GithubRepo = "github.com/hustshawn/eks-capacity-block-demo"
   }
 }
 

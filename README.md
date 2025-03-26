@@ -38,16 +38,17 @@ The infrastructure includes:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/eks-capacity-block.git
+git clone https://github.com/hustshawn/eks-capacity-block-demo
 cd eks-capacity-block
 ```
 
 ### 2. Configure your ML Capacity Block reservation
 
-Create a `dev.auto.tfvars` file with your ML Capacity Block reservation ID:
+Create a `dev.auto.tfvars` file with your ML Capacity Block reservation ID and AWS region:
 
 ```hcl
 capacity_reservation_id = "cr-xxxxxxxxxxxxxxxxx"
+aws_region = "ap-northeast-1"
 ```
 
 ### 3. Initialize and apply Terraform
@@ -63,7 +64,7 @@ terraform apply planfile
 After successful deployment, configure kubectl to connect to your cluster:
 
 ```bash
-aws eks --region ap-northeast-1 update-kubeconfig --name ml-capacity-block
+aws eks --region <your-region> update-kubeconfig --name ml-capacity-block
 ```
 
 ### 5. Deploy ML workloads
